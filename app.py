@@ -2,25 +2,16 @@
 from flask import Flask, jsonify, request
 from controllers.produto_controller import obter_produtos, obter_produto_por_id
 
-
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return "Hello"
 
 @app.route("/usuarios")
 def listar_usuarios():
     return "Lista de usuários"
 
-@app.route("/usuarios")
-def criar_usuario():
-    return "Usuário criado"
-
 # Rota para listar os produtos cadastrados e retornar os dados em formato JSON
-@app.route("/api/produtos", methods=["GET"])
-def listar_produtos_api():
-    nome = request.args.get("nome")
+@app.route("/api/produtos/<string:nome>", methods=["GET"])
+def listar_produtos_api(nome):
     produtos = obter_produtos(nome)
 
     return jsonify(produtos)
