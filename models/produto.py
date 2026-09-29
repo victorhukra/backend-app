@@ -8,7 +8,7 @@ produtos = [
         "nome": "Mouse Gamer",
         "preco": 150.00
     },
-    {
+    {   
         "id": 2,
         "nome": "Teclado Mecânico",
         "preco": 250.00
@@ -22,3 +22,11 @@ produtos = [
 
 def listar_produtos():
     return produtos
+
+
+def buscar_produto_por_id(id):
+    for produto in produtos:
+        if produto["id"] == id:
+            return produto
+
+    return None
