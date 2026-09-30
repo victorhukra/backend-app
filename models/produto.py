@@ -1,32 +1,33 @@
+from database.connection import get_connection
 
-# Dados utilizados apenas para simulação
-# enquanto o Banco de Dados ainda não está pronto
 
-produtos = [
-    {
-        "id": 1,
-        "nome": "Mouse Gamer",
-        "preco": 150.00
-    },
-    {   
-        "id": 2,
-        "nome": "Teclado Mecânico",
-        "preco": 250.00
-    },
-    {
-        "id": 3,
-        "nome": "Headset Gamer",
-        "preco": 200.00
-    }
-]
+def listar_produtos(nome):
+    cnx = get_connection()
+    cur = cnx.cursor(dictionary=True)
+    cur.execute(
+        "SELECT id, nome, descricao, preco, usuario_id FROM produtos WHERE nome LIKE %s",
+        ("%" + nome + "%",)
+    )
+    produtos = cur.fetchall()
+    cur.close()
+    cnx.close()
 
-def listar_produtos():
+    for p in produtos:
+        p["preco"] = float(p["preco"])
     return produtos
 
 
 def buscar_produto_por_id(id):
-    for produto in produtos:
-        if produto["id"] == id:
-            return produto
+    cnx = get_connection()
+    cur = cnx.cursor(dictionary=True)
+    cur.execute(
+        "SELECT id, nome, descricao, preco, usuario_id FROM produtos WHERE id = %s",
+        (id,)
+    )
+    produto = cur.fetchone()
+    cur.close()
+    cnx.close()
 
-    return None
+    if produto:
+        produto["preco"] = float(produto["preco"])
+    return produto
