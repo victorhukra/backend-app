@@ -42,12 +42,14 @@ from flask import Flask, jsonify, request
 from controllers.produto_controller import obter_produtos, obter_produto_por_id
 # from controllers.usuario_controller import obter_usuarios, obter_perfil
 
+<<<<<<< HEAD
 app = Flask(__name__, static_folder="static", static_url_path="/static")
 
 
 @app.route("/")
 def home():
     return app.send_static_file("index.html")
+
 
 
 # Lista produtos com paginação e busca: /api/produtos?nome=mouse&pagina=1&por_pagina=5
@@ -57,6 +59,12 @@ def listar_produtos_api():
     pagina = request.args.get("pagina", 1, type=int)
     por_pagina = request.args.get("por_pagina", 5, type=int)
     return jsonify(obter_produtos(nome, pagina, por_pagina))
+
+# Rota para listar os produtos cadastrados e retornar os dados em formato JSON
+# @app.route("/api/produtos/<string:nome>", methods=["GET"])
+# def listar_produtos_api(nome):
+#     produtos = obter_produtos(nome)
+# >>>>>>> 8bbf525c8686488bd3afccadc76825c711af1d85
 
 
 # Rota parametrizada com String: /api/produtos/busca/mouse
@@ -74,6 +82,7 @@ def buscar_produto_api(id):
         return jsonify({"erro": "Produto não encontrado"}), 404
     return jsonify(produto)
 
+<<<<<<< HEAD
 
 # # Lista de usuários: /api/usuarios
 # @app.route("/api/usuarios")
@@ -92,3 +101,7 @@ def buscar_produto_api(id):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000, debug=True)
+# if __name__ == '__main__':
+#     app.run(host="0.0.0.0", port=3000, debug=True)
+# >>>>>>> 8bbf525c8686488bd3afccadc76825c711af1d85
+A
