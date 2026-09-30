@@ -41,8 +41,6 @@
 from flask import Flask, jsonify, request
 from controllers.produto_controller import obter_produtos, obter_produto_por_id
 # from controllers.usuario_controller import obter_usuarios, obter_perfil
-
-<<<<<<< HEAD
 app = Flask(__name__, static_folder="static", static_url_path="/static")
 
 
@@ -81,8 +79,6 @@ def buscar_produto_api(id):
     if produto is None:
         return jsonify({"erro": "Produto não encontrado"}), 404
     return jsonify(produto)
-
-<<<<<<< HEAD
 
 # # Lista de usuários: /api/usuarios
 # @app.route("/api/usuarios")
