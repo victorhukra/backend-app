@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API da Loja</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main>
+    <h1>API da Loja</h1>
+
+    <section>
+      <h2>Produtos</h2>
+      <form id="form-produtos">
+        <input type="text" id="termo-produtos" placeholder="Termo de busca">
+        <button>Buscar</button>
+      </form>
+      <p id="status-produtos"></p>
+      <ul id="resultados-produtos"></ul>
+      <nav id="paginacao-produtos" hidden>
+        <button id="anterior-produtos">Anterior</button>
+        <button id="proxima-produtos">Próxima</button>
+      </nav>
+    </section>
+
+    <section>
+      <h2>Usuários</h2>
+      <form id="form-usuarios">
+        <input type="text" id="termo-usuarios" placeholder="Nome do usuário">
+        <button>Buscar</button>
+      </form>
+      <p id="status-usuarios"></p>
+      <ul id="resultados-usuarios"></ul>
+      <nav id="paginacao-usuarios" hidden>
+        <button id="anterior-usuarios">Anterior</button>
+        <button id="proxima-usuarios">Próxima</button>
+      </nav>
+    </section>
+
+    <section id="perfil" hidden>
+      <h2>Perfil do usuário</h2>
+      <p id="perfil-nome"></p>
+      <p id="perfil-email" class="detalhe"></p>
+      <h3>Produtos do usuário</h3>
+      <ul id="perfil-produtos"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="/static/js/main.js"></script>
+</body>
+</html>
