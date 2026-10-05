@@ -1,52 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>API da Loja</title>
-  <link rel="stylesheet" href="/static/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>API da Loja</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-  <main>
-    <h1>API da Loja</h1>
+    <main>
+        <h1>API da Loja</h1>
 
-    <section>
-      <h2>Produtos</h2>
-      <form id="form-produtos">
-        <input type="text" id="termo-produtos" placeholder="Termo de busca">
-        <button>Buscar</button>
-      </form>
-      <p id="status-produtos"></p>
-      <ul id="resultados-produtos"></ul>
-      <nav id="paginacao-produtos" hidden>
-        <button id="anterior-produtos">Anterior</button>
-        <button id="proxima-produtos">Próxima</button>
-      </nav>
-    </section>
+        <section>
+            <h2>Produtos</h2>
 
-    <section>
-      <h2>Usuários</h2>
-      <form id="form-usuarios">
-        <input type="text" id="termo-usuarios" placeholder="Nome do usuário">
-        <button>Buscar</button>
-      </form>
-      <p id="status-usuarios"></p>
-      <ul id="resultados-usuarios"></ul>
-      <nav id="paginacao-usuarios" hidden>
-        <button id="anterior-usuarios">Anterior</button>
-        <button id="proxima-usuarios">Próxima</button>
-      </nav>
-    </section>
+            <h3>Buscar por nome</h3>
+            <input type="text" id="termo-produtos" placeholder="Nome do produto">
+            <button id="buscar-produtos" type="button">Buscar</button>
+            <p id="status-produtos"></p>
+            <ul id="resultados-produtos"></ul>
 
-    <section id="perfil" hidden>
-      <h2>Perfil do usuário</h2>
-      <p id="perfil-nome"></p>
-      <p id="perfil-email" class="detalhe"></p>
-      <h3>Produtos do usuário</h3>
-      <ul id="perfil-produtos"></ul>
-    </section>
-  </main>
+            <div id="paginacao-produtos" hidden>
+                <button id="anterior-produtos" type="button">Anterior</button>
+                <span id="pagina-produtos">Página 1</span>
+                <button id="proxima-produtos" type="button">Próxima</button>
+            </div>
 
-  <script type="module" src="/static/js/main.js"></script>
+            <h3>Buscar por ID</h3>
+            <input type="number" id="id-produto" placeholder="ID do produto">
+            <button id="buscar-produto-id" type="button">Buscar</button>
+            <p id="resultado-produto-id"></p>
+        </section>
+
+        <section>
+            <h2>Usuários</h2>
+
+            <h3>Buscar por nome</h3>
+            <input type="text" id="termo-usuarios" placeholder="Nome do usuário">
+            <button id="buscar-usuarios" type="button">Buscar</button>
+            <p id="status-usuarios"></p>
+            <ul id="resultados-usuarios"></ul>
+
+            <div id="paginacao-usuarios" hidden>
+                <button id="anterior-usuarios" type="button">Anterior</button>
+                <span id="pagina-usuarios">Página 1</span>
+                <button id="proxima-usuarios" type="button">Próxima</button>
+            </div>
+
+            <h3>Buscar usuário por ID</h3>
+            <input type="number" id="id-usuario" placeholder="ID do usuário">
+            <button id="buscar-usuario-id" type="button">Buscar</button>
+            <p id="resultado-usuario-id"></p>
+        </section>
+    </main>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/main.js"></script>
 </body>
 </html>

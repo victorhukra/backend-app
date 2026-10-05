@@ -9,13 +9,17 @@ async function requisicao(url) {
 }
 
 function buscarProdutos(nome, pagina) {
-    return requisicao(/produtos/busca/${nome}/${pagina});
+    return requisicao(`/produtos/busca/${nome}/${pagina}`);
+}
+
+function buscarProdutoPorId(id) {
+    return requisicao(`/produtos/${id}`);
 }
 
 function buscarUsuarios(nome, pagina) {
-    return requisicao(/usuarios/busca/${nome}/${pagina});
+    return requisicao(`/usuarios/busca/${nome}/${pagina}`);
 }
 
 function buscarPerfil(id) {
-    return requisicao(/usuarios/${id});
+    return requisicao(`/usuarios/${id}`);
 }
