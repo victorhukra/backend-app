@@ -1,9 +1,11 @@
 from flask import Flask, send_from_directory
+from database.connection import close_connection
 from controllers.produto_controller import obter_produtos, obter_produto_por_id
 from controllers.usuario_controller import obter_usuarios, obter_perfil_usuario
 
 app = Flask(__name__)
 
+app.teardown_appcontext(close_connection)
 
 @app.route("/")
 def index():
