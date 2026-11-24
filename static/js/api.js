@@ -9,7 +9,8 @@ async function requisicao(url) {
 }
 
 function buscarProdutos(nome, pagina) {
-    return requisicao(`/produtos/busca/${nome}/${pagina}`);
+    const parametros = new URLSearchParams({ nome, pagina });
+    return requisicao(`/produtos?${parametros}`);
 }
 
 function buscarProdutoPorId(id) {
@@ -17,7 +18,8 @@ function buscarProdutoPorId(id) {
 }
 
 function buscarUsuarios(nome, pagina) {
-    return requisicao(`/usuarios/busca/${nome}/${pagina}`);
+    const parametros = new URLSearchParams({ nome, pagina });
+    return requisicao(`/usuarios?${parametros}`);
 }
 
 function buscarPerfil(id) {

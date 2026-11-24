@@ -6,8 +6,6 @@ let paginaUsuarios = 1;
 async function pesquisarProdutos() {
     const nome = document.getElementById("termo-produtos").value;
 
-    if (!nome) return;
-
     try {
         const produtos = await buscarProdutos(nome, paginaProdutos);
         const lista = document.getElementById("resultados-produtos");
@@ -92,8 +90,6 @@ document.getElementById("buscar-produto-id").addEventListener("click", () => {
 
 async function pesquisarUsuarios() {
     const nome = document.getElementById("termo-usuarios").value;
-
-    if (!nome) return;
 
     try {
         const usuarios = await buscarUsuarios(nome, paginaUsuarios);
