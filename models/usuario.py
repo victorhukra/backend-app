@@ -61,3 +61,38 @@ def buscar_usuario_por_id(id):
     usuario["produtos"] = produtos
 
     return usuario
+
+
+def buscar_usuario_por_email(email):
+    cnx = get_connection()
+
+    with closing(cnx.cursor(dictionary=True)) as cur:
+        cur.execute(
+            """
+            SELECT id, nome, email, senha_hash
+            FROM usuarios
+            WHERE email = %s
+            """,
+            (email,)
+        )
+
+        return cur.fetchone()
+
+
+def criar_usuario(nome, email, senha_hash):
+    cnx = get_connection()
+
+    with closing(cnx.cursor()) as cur:
+        try:
+            cur.execute(
+                """
+                INSERT INTO usuarios (nome, email, senha_hash)
+                VALUES (%s, %s, %s)
+                """,
+                (nome, email, senha_hash)
+            )
+            cnx.commit()
+            return cur.lastrowid
+        except Exception:
+            cnx.rollback()
+            raise

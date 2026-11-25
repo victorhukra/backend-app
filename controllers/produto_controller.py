@@ -1,5 +1,6 @@
-from flask import jsonify
-from models.produto import listar_produtos, buscar_produto_por_id
+
+from flask import jsonify, request, session # utilizar
+from models.produto import criar_produto, listar_produtos, buscar_produto_por_id
 
 
 def obter_produtos(nome="", pagina=1):
@@ -14,3 +15,8 @@ def obter_produto_por_id(id):
         return jsonify(produto)
 
     return jsonify({"erro": "Produto não encontrado"}), 404
+
+
+def inserir_produto():
+    # implementar
+    # obs: utilizar a função "criar_produto" do models

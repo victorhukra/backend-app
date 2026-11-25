@@ -1,9 +1,22 @@
+
+
 from flask import Flask, jsonify, request, send_from_directory
+from auth import login_required
 from database.connection import close_connection
-from controllers.produto_controller import obter_produtos, obter_produto_por_id
-from controllers.usuario_controller import obter_usuarios, obter_perfil_usuario
+from controllers.produto_controller import inserir_produto, obter_produto_por_id, obter_produtos
+
+from controllers.usuario_controller import (
+    cadastrar_usuario,
+    encerrar_sessao,
+    iniciar_sessao,
+    obter_usuarios,
+    obter_perfil_usuario,
+    verificar_sessao,
+)
 
 app = Flask(__name__)
+
+app.secret_key = "chave"
 
 app.teardown_appcontext(close_connection)
 
@@ -33,9 +46,20 @@ def listar_produtos_api():
     return obter_produtos(nome, pagina)
 
 
+@app.route("/api/produtos", methods=["POST"])
+@login_required
+def inserir_produto_api():
+    return inserir_produto()
+
+
 @app.route("/api/produtos/<int:id>", methods=["GET"])
 def buscar_produto_api(id):
     return obter_produto_por_id(id)
+
+
+@app.route("/api/usuarios", methods=["POST"])
+def cadastrar_usuario_api():
+    return cadastrar_usuario()
 
 
 @app.route("/api/usuarios", methods=["GET"])
@@ -51,6 +75,22 @@ def listar_usuarios_api():
 @app.route("/api/usuarios/<int:id>", methods=["GET"])
 def perfil_usuario_api(id):
     return obter_perfil_usuario(id)
+
+
+@app.route("/api/sessoes", methods=["POST"])
+def criar_sessao_api():
+    return iniciar_sessao()
+
+
+@app.route("/api/sessoes", methods=["GET"])
+def consultar_sessao_api():
+    return verificar_sessao()
+
+
+@app.route("/api/sessoes", methods=["DELETE"])
+def excluir_sessao_api():
+    return encerrar_sessao()
+
 
 
 if __name__ == "__main__":

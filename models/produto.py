@@ -47,3 +47,22 @@ def buscar_produto_por_id(id):
         produto["preco"] = float(produto["preco"])
 
     return produto
+
+
+def criar_produto(nome, descricao, preco, usuario_id):
+    cnx = get_connection()
+
+    with closing(cnx.cursor()) as cur:
+        try:
+            cur.execute(
+                """
+                INSERT INTO produtos (nome, descricao, preco, usuario_id)
+                VALUES (%s, %s, %s, %s)
+                """,
+                (nome, descricao, preco, usuario_id)
+            )
+            cnx.commit()
+            return cur.lastrowid
+        except Exception:   
+            cnx.rollback() 
+            raise
