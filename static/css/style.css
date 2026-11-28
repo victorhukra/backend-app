@@ -42,6 +42,58 @@ input {
     border-radius: 4px;
 }
 
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font: inherit;
+    resize: vertical;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.formularios-conta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.form-conta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.form-conta h3 {
+    margin: 0 0 8px;
+}
+
+.form-conta input {
+    width: 100%;
+}
+
+.form-conta button {
+    margin-left: 0;
+}
+
+.status-form {
+    min-height: 1.2em;
+    margin: 4px 0 0;
+}
+
+.status-form[data-estado="sucesso"] {
+    color: #176b31;
+}
+
+#status-sessao {
+    display: inline-block;
+    margin: 0 12px 12px 0;
+}
+
 button {
     padding: 10px 15px;
     margin: 5px 2px;
@@ -92,7 +144,8 @@ li {
 }
 
 #status-produtos,
-#status-usuarios {
+#status-usuarios,
+.status-form {
     color: #c00;
 }
 

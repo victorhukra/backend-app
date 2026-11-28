@@ -1,4 +1,5 @@
-
+import os
+import secrets
 
 from flask import Flask, jsonify, request, send_from_directory
 from auth import login_required
@@ -16,7 +17,8 @@ from controllers.usuario_controller import (
 
 app = Flask(__name__)
 
-app.secret_key = "chave"
+# Configure FLASK_SECRET_KEY para manter sessões válidas entre reinícios e processos.
+app.secret_key = os.environ.get("FLASK_SECRET_KEY") or secrets.token_hex(32)
 
 app.teardown_appcontext(close_connection)
 

@@ -10,8 +10,59 @@
     <main>
         <h1>API da Loja</h1>
 
+        <section aria-labelledby="titulo-conta">
+            <h2 id="titulo-conta">Minha conta</h2>
+            <p id="status-sessao" role="status" aria-live="polite">Verificando sessão...</p>
+            <button id="sair-conta" type="button" hidden>Sair</button>
+
+            <div class="formularios-conta">
+                <form id="form-cadastro" class="form-conta">
+                    <h3>Criar usuário</h3>
+                    <label for="nome-cadastro">Nome</label>
+                    <input id="nome-cadastro" name="nome" type="text" maxlength="100" autocomplete="name" required>
+
+                    <label for="email-cadastro">E-mail</label>
+                    <input id="email-cadastro" name="email" type="email" maxlength="150" autocomplete="email" required>
+
+                    <label for="senha-cadastro">Senha</label>
+                    <input id="senha-cadastro" name="senha" type="password" minlength="8" maxlength="128" autocomplete="new-password" required>
+
+                    <p id="status-cadastro" class="status-form" role="status" aria-live="polite"></p>
+                    <button type="submit">Criar conta</button>
+                </form>
+
+                <form id="form-login" class="form-conta">
+                    <h3>Entrar</h3>
+                    <label for="email-login">E-mail</label>
+                    <input id="email-login" name="email" type="email" maxlength="150" autocomplete="username" required>
+
+                    <label for="senha-login">Senha</label>
+                    <input id="senha-login" name="senha" type="password" autocomplete="current-password" required>
+
+                    <p id="status-login" class="status-form" role="status" aria-live="polite"></p>
+                    <button type="submit">Entrar</button>
+                </form>
+            </div>
+        </section>
+
         <section>
             <h2>Produtos</h2>
+
+            <h3>Cadastrar produto</h3>
+            <p id="aviso-login-produto">Entre na sua conta para cadastrar produtos.</p>
+            <form id="form-cadastro-produto" class="form-conta" hidden>
+                <label for="nome-produto-cadastro">Nome</label>
+                <input id="nome-produto-cadastro" name="nome" type="text" maxlength="150" required>
+
+                <label for="descricao-produto-cadastro">Descrição</label>
+                <textarea id="descricao-produto-cadastro" name="descricao" maxlength="10000" rows="4"></textarea>
+
+                <label for="preco-produto-cadastro">Preço (R$)</label>
+                <input id="preco-produto-cadastro" name="preco" type="number" min="0.01" max="99999999.99" step="0.01" required>
+
+                <p id="status-cadastro-produto" class="status-form" role="status" aria-live="polite"></p>
+                <button type="submit">Cadastrar produto</button>
+            </form>
 
             <h3>Buscar por nome</h3>
             <input type="text" id="termo-produtos" placeholder="Nome do produto">

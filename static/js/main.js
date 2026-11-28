@@ -1,7 +1,124 @@
 let paginaProdutos = 1;
 let paginaUsuarios = 1;
 
+// CONTA
+
+async function atualizarSessao() {
+    const status = document.getElementById("status-sessao");
+    const botaoSair = document.getElementById("sair-conta");
+    const formularioProduto = document.getElementById("form-cadastro-produto");
+    const avisoLoginProduto = document.getElementById("aviso-login-produto");
+
+    try {
+        const sessao = await verificarSessao();
+        botaoSair.hidden = !sessao.autenticado;
+        formularioProduto.hidden = !sessao.autenticado;
+        avisoLoginProduto.hidden = sessao.autenticado;
+
+        status.textContent = sessao.autenticado
+            ? `Sessão iniciada como ${sessao.usuario.nome}.`
+            : "Você não está conectado.";
+    } catch (erro) {
+        botaoSair.hidden = true;
+        formularioProduto.hidden = true;
+        avisoLoginProduto.hidden = false;
+        status.textContent = erro.message;
+    }
+}
+
+document.getElementById("form-cadastro").addEventListener("submit", async evento => {
+    evento.preventDefault();
+
+    const formulario = evento.currentTarget;
+    const status = document.getElementById("status-cadastro");
+    const dados = {
+        nome: document.getElementById("nome-cadastro").value,
+        email: document.getElementById("email-cadastro").value,
+        senha: document.getElementById("senha-cadastro").value,
+    };
+
+    status.textContent = "";
+    status.dataset.estado = "";
+
+    try {
+        await cadastrarUsuario(dados);
+        formulario.reset();
+        document.getElementById("email-login").value = dados.email;
+        status.textContent = "Conta criada. Entre com seu e-mail e senha.";
+        status.dataset.estado = "sucesso";
+    } catch (erro) {
+        status.textContent = erro.message;
+        status.dataset.estado = "erro";
+    }
+});
+
+document.getElementById("form-login").addEventListener("submit", async evento => {
+    evento.preventDefault();
+
+    const formulario = evento.currentTarget;
+    const status = document.getElementById("status-login");
+    const dados = {
+        email: document.getElementById("email-login").value,
+        senha: document.getElementById("senha-login").value,
+    };
+
+    status.textContent = "";
+    status.dataset.estado = "";
+
+    try {
+        await iniciarSessao(dados);
+        formulario.reset();
+        status.textContent = "Login realizado com sucesso.";
+        status.dataset.estado = "sucesso";
+        await atualizarSessao();
+    } catch (erro) {
+        status.textContent = erro.message;
+        status.dataset.estado = "erro";
+    }
+});
+
+document.getElementById("sair-conta").addEventListener("click", async () => {
+    const status = document.getElementById("status-login");
+
+    try {
+        await encerrarSessao();
+        status.textContent = "Sessão encerrada.";
+        status.dataset.estado = "sucesso";
+        await atualizarSessao();
+    } catch (erro) {
+        status.textContent = erro.message;
+        status.dataset.estado = "erro";
+    }
+});
+
+atualizarSessao();
+
 // PRODUTOS
+
+document.getElementById("form-cadastro-produto").addEventListener("submit", async evento => {
+    evento.preventDefault();
+
+    const formulario = evento.currentTarget;
+    const status = document.getElementById("status-cadastro-produto");
+    const dados = {
+        nome: document.getElementById("nome-produto-cadastro").value,
+        descricao: document.getElementById("descricao-produto-cadastro").value,
+        preco: Number(document.getElementById("preco-produto-cadastro").value),
+    };
+
+    status.textContent = "";
+    status.dataset.estado = "";
+
+    try {
+        const produto = await criarProduto(dados);
+        formulario.reset();
+        status.textContent = `Produto cadastrado com sucesso (ID: ${produto.id}).`;
+        status.dataset.estado = "sucesso";
+    } catch (erro) {
+        status.textContent = erro.message;
+        status.dataset.estado = "erro";
+    }
+});
 
 async function pesquisarProdutos() {
     const nome = document.getElementById("termo-produtos").value;
